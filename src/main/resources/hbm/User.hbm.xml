@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.user.model.User" table="user">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="string">
+            <column name="username"/>
+        </property>
+        <property name="password" type="string">
+            <column name="password"/>
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" />
+        </property>
+        <property name="price" type="double">
+            <column name="price"/>
+        </property>
+        <property name="balance" type="double">
+            <column name="balance"/>
+        </property>
+        <property name="name" type="string">
+            <column name="name"/>
+        </property>
+        <property name="nickname" type="string">
+            <column name="nickname"/>
+        </property>
+        <property name="yy" type="string">
+            <column name="yy"/>
+        </property>
+        <property name="qq" type="string">
+            <column name="qq"/>
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile"/>
+        </property>
+        <property name="idcard" type="string">
+            <column name="idcard"/>
+        </property>
+        <property name="email" type="string">
+            <column name="email"/>
+        </property>
+        <property name="alipay" type="string">
+            <column name="alipay"/>
+        </property>
+        <property name="bankcard" type="string">
+            <column name="bankcard"/>
+        </property>
+        <property name="type" column="type">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.akkafun.w5.user.model.UserType</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+        <property name="discount" type="int">
+            <column name="discount"/>
+        </property>
+        <property name="proportion" type="int">
+            <column name="proportion"/>
+        </property>
+        <property name="roleId" type="java.lang.Long">
+            <column name="roleId" />
+        </property>
+        <many-to-one name="role" cascade="none" insert="false" update="false">
+            <column name="roleId" />
+        </many-to-one>
+        <many-to-one name="operator" cascade="all">
+        	<column name="operatorId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

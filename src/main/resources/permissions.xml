@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+    <user name="系统管理员" username="admin"/>
+
+    <resource name="会员管理" user-definedable="true" unique-key="customer">
+        <operation name="查看会员详细" url="/customer/view.action" configable="false"/>
+        <operation name="查询会员" url="/customer/list.action" required="查看会员详细"/>
+        <operation name="新建会员" url="/customer/add.action" required="保存会员,查询会员"/>
+        <operation name="编辑会员" url="/customer/update.action" required="保存会员,查询会员"/>
+        <operation name="保存会员" url="/customer/save.action" configable="false"/>
+    </resource>
+
+    <!--<role name="会员">-->
+
+    <!--</role>-->
+    <role name="陪练">
+        <operation ref="查询会员"/>
+    </role>
+</permissions>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.permission.model.RolePermission" table="role_permission">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="roleId" type="java.lang.Long">
+            <column name="roleId" not-null="true" />
+        </property>
+		<property name="permissionId" type="java.lang.Long">
+			<column name="permissionId" not-null="true"/>
+		</property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.order.model.OrderBase" table="order_base">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="coachId" type="java.lang.Long">
+            <column name="coachId" />
+        </property>
+        <many-to-one name="coach" cascade="none" insert="false" update="false">
+            <column name="coachId" />
+        </many-to-one>
+        <property name="customerId" type="java.lang.Long">
+            <column name="customerId" />
+        </property>
+        <many-to-one name="customer" cascade="none" insert="false" update="false">
+            <column name="customerId" />
+        </many-to-one>
+
+        <property name="customerUsername" type="string">
+            <column name="customerUsername"/>
+        </property>
+        <property name="coachUsername" type="string">
+            <column name="coachUsername"/>
+        </property>
+        <property name="price" type="double">
+            <column name="price"/>
+        </property>
+        <property name="startTime" type="java.util.Date">
+            <column name="startTime"/>
+        </property>
+        <property name="endTime" type="java.util.Date">
+            <column name="endTime"/>
+        </property>
+        <property name="coachHour" type="double">
+            <column name="coachHour"/>
+        </property>
+        <property name="coachSalary" type="double">
+            <column name="coachSalary"/>
+        </property>
+        <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.akkafun.w5.order.model.OrderStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <many-to-one name="operator" cascade="all">
+        	<column name="operatorId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

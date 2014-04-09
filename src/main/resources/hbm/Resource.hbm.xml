@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.permission.model.Resource" table="resource">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="50" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="50" />
+        </property>
+        <property name="userDefinedable" type="java.lang.Boolean">
+            <column name="userDefinedable" />
+        </property>
+        <property name="uniqueKey" type="string">
+            <column name="uniqueKey" length="100" />
+        </property>
+        <property name="shareable" type="java.lang.Boolean">
+            <column name="shareable" />
+        </property>
+        <property name="systemInit" type="java.lang.Boolean">
+            <column name="systemInit" />
+        </property>
+		<set name="operations" table="operation" lazy="true" cascade="none" inverse="true">
+			<key column="resourceId"/>
+			<one-to-many class="com.akkafun.w5.permission.model.Operation"/>
+		</set>
+    </class>
+</hibernate-mapping>

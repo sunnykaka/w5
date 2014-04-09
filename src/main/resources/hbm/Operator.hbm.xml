@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.common.model.Operator" table="operator">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="addTime" type="timestamp">
+            <column name="addTime" length="19" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="updateTime" length="19" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="100" />
+        </property>
+        <property name="creatorId" type="java.lang.Long">
+            <column name="creatorId" />
+        </property>
+		<many-to-one name="creator" update="false" insert="false" cascade="none">
+        	<column name="creatorId"/>
+        </many-to-one>
+        <property name="updatorId" type="java.lang.Long">
+            <column name="updatorId" />
+        </property>
+        <many-to-one name="updator" update="false" insert="false" cascade="none">
+        	<column name="updatorId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

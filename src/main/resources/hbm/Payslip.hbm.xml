@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-3-12 12:10:47 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.akkafun.w5.payslip.model.Payslip" table="payslip">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="year" type="int">
+            <column name="year"/>
+        </property>
+        <property name="month" type="int">
+            <column name="month"/>
+        </property>
+        <property name="coachHour" type="double">
+            <column name="coachHour"/>
+        </property>
+        <property name="coachSalary" type="double">
+            <column name="coachSalary"/>
+        </property>
+        <property name="adjustSalary" type="double">
+            <column name="adjustSalary"/>
+        </property>
+        <property name="actualSalary" type="double">
+            <column name="actualSalary"/>
+        </property>
+        <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.akkafun.w5.payslip.model.PayslipStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property name="balanceBefore" type="double">
+            <column name="balanceBefore" />
+        </property>
+        <property name="balanceAfter" type="double">
+            <column name="balanceAfter"/>
+        </property>
+        <property name="userId" type="java.lang.Long">
+            <column name="userId" />
+        </property>
+        <many-to-one name="user" cascade="none" insert="false" update="false">
+            <column name="userId" />
+        </many-to-one>
+        <many-to-one name="operator" cascade="all">
+        	<column name="operatorId"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
