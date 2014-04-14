@@ -55,12 +55,12 @@ public class RoleService {
 
 	@Transactional(readOnly = true)
 	public Role getCoachRole() {
-		return getByName("陪练");
+        return getByName("陪练");
 	}
 	
 	@Transactional(readOnly = true)
 	public Role getCustomerRole() {
-		return getByName("顾客");
+		return getByName("会员");
 	}
 
 }

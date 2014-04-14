@@ -57,8 +57,6 @@ public class User implements java.io.Serializable,
 
     private String idcard;
 
-    @Email
-    @Size(max = 50)
     private String email;
 
     private String alipay;

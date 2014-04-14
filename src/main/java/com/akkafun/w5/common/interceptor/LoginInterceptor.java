@@ -116,7 +116,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				log.info("完整URL:" + url);
 				sessionProvider.setAttr(request, (HttpServletResponse)response, FROM_URL, url.toString());
 				
-				response.sendRedirect(base + "/login_submit.action");
+				response.sendRedirect(base + "/login.action");
 				return false;
 			} else if(checkPermission){
 				//检查权限

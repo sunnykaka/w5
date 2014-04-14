@@ -1,97 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd"
-		default-lazy-init="true">
-	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean
-					class="com.akkafun.platform.springmvc.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
-	
-		<property name="webBindingInitializer">
-			<bean class="com.akkafun.platform.springmvc.BindingInitializer" >
-				<property name="validator" ref="validator" />
-			</bean>
-		</property>
-	</bean>
-	<context:component-scan base-package="com.akkafun.w5" use-default-filters="false">
-	 	<context:include-filter expression="com\.lianhua\..*web\..*" type="regex"/>
-	</context:component-scan>
-	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="interceptors">
-			<list>
-				<bean id="loginInterceptor" class="com.akkafun.w5.common.interceptor.LoginInterceptor" >
-					<property name="exceptUrls">
-						<list>
-							<value>/*.action</value>
-							<value>/</value>
-							<value>/error/*.action</value>
-							<value>/notice/*.action</value>
-						</list>
-					</property>
-					<property name="permissionExceptUrls">
-						<list>
-							<value>/ajax/**</value>
-							<value>/upload/**</value>
-							<value>/admin/admin.action</value>
-							<value>/np/**</value>
-						</list>
-					</property>
-				</bean>
-				<bean id="webHolderInterceptor" class="com.akkafun.w5.common.interceptor.WebHolderInterceptor" />
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="com.akkafun.platform.springmvc.PlatformMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="org.springframework.web.bind.MissingServletRequestParameterException">/error/requiredParameter</prop>
-				<prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
-				<prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
-				<prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
-				<prop key="java.lang.Exception">/error/error</prop>
-			</props>
-		</property>
-	</bean>
-	
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/page" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	
-	<bean id="validator"
-	      class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+       default-lazy-init="true">
 
-	<!-- 
-  	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basenames">
-			<list>
-				<value>/WEB-INF/resources/line/messages</value>
-				<value>/WEB-INF/resources/common/messages</value>
-			</list>
-		</property>
-		<property name="cacheSeconds" value="10" />
-	</bean>
-	 -->
-	<bean id="requestDataValueProcessor" class="com.akkafun.platform.springmvc.PageRequestDataValueProcessor"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean
+                        class="com.akkafun.platform.springmvc.StringHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+
+        <property name="webBindingInitializer">
+            <bean class="com.akkafun.platform.springmvc.BindingInitializer">
+                <property name="validator" ref="validator"/>
+            </bean>
+        </property>
+    </bean>
+    <context:component-scan base-package="com.akkafun.w5" use-default-filters="false">
+        <context:include-filter expression="com\.akkafun\..*web\..*" type="regex"/>
+    </context:component-scan>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <bean id="loginInterceptor" class="com.akkafun.w5.common.interceptor.LoginInterceptor">
+                    <property name="exceptUrls">
+                        <list>
+                            <value>/login.*</value>
+                            <value>/logout.*</value>
+                            <value>/</value>
+                            <value>/error/*</value>
+                        </list>
+                    </property>
+                    <property name="permissionExceptUrls">
+                        <list>
+                            <value>/index.*</value>
+                            <value>/ajax/**</value>
+                            <value>/upload/**</value>
+                            <value>/np/**</value>
+                        </list>
+                    </property>
+                </bean>
+                <bean id="webHolderInterceptor" class="com.akkafun.w5.common.interceptor.WebHolderInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.akkafun.platform.springmvc.PlatformMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.springframework.web.bind.MissingServletRequestParameterException">
+                    /error/requiredParameter
+                </prop>
+                <prop key="org.springframework.beans.TypeMismatchException">/error/mismatchParameter</prop>
+                <prop key="org.springframework.web.bind.ServletRequestBindingException">/error/bindException</prop>
+                <prop key="org.springframework.dao.DataIntegrityViolationException">/error/integrityViolation</prop>
+                <prop key="java.lang.Exception">/error/error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/page"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+    <!--
+      <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>/WEB-INF/resources/line/messages</value>
+                <value>/WEB-INF/resources/common/messages</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="10" />
+    </bean>
+     -->
+    <bean id="requestDataValueProcessor" class="com.akkafun.platform.springmvc.PageRequestDataValueProcessor"/>
 
 </beans>

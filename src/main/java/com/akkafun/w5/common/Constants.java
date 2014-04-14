@@ -6,6 +6,5 @@ public class Constants {
 	
 	public static final String PATH_DELIMITER = "/";
 	
-	public static final String DEFAULT_CUSTOMER_PASSWORD = "111111";
-	public static final String DEFAULT_COACH_PASSWORD = "111111";
+	public static final String DEFAULT_USER_PASSWORD = "111111";
 }

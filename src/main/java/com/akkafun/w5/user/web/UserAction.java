@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.akkafun.w5.user.model.UserType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,8 +64,58 @@ public class UserAction extends BaseAction {
 		return "/index";
 	}
 
+    @RequestMapping(value="/customer/add")
+    public String addCustomer(ModelMap model) {
 
-	@RequestMapping(value="/login_submit")
+        return "/customer/add";
+    }
+
+    @RequestMapping("/customer/update")
+    public String updateCustomer(ModelMap model) {
+
+        return "/customer/update";
+    }
+
+    @RequestMapping("/customer/save")
+    public String saveCustomer(HttpServletRequest request, @ModelAttribute("customer") @Valid User customer, BindingResult results,
+                           String newPassword, ModelMap model) {
+        if(!results.hasErrors()) {
+            if(userService.isUsernameExist(customer.getUsername(), customer.getId())) {
+                results.reject("", "登录名称已经存在");
+            }
+        }
+
+        if(results.hasErrors()) {
+            //数据验证失败
+            if(EntityUtil.isCreate(customer)) {
+                return addCustomer(model);
+            } else {
+                return updateCustomer(model);
+            }
+        }
+
+        userService.saveUser(customer, newPassword);
+
+        return "redirect:/customer/list.action";
+    }
+
+    @RequestMapping(value="/customer/list")
+    public String listCustomer(HttpServletRequest request, ModelMap model) {
+
+        Map<String, String[]> params = Servlets.getParametersStartingWith(request, "sParam_");
+        model.put("customers", userService.findCustomerByKey(params, PageEngineFactory.getPageEngine(request)));
+
+
+        return "/customer/list";
+    }
+
+    @RequestMapping(value="/login", method = RequestMethod.GET)
+    public String loginPage(HttpServletRequest request, ModelMap model) {
+
+        return "/login";
+    }
+
+	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, String saveCookie,
 			@ModelAttribute("user") User aModel, BindingResult results, ModelMap model, RedirectAttributes redirectAttributes) {
 
@@ -72,9 +123,6 @@ public class UserAction extends BaseAction {
 		User user = null;
 		if(!StringUtils.isBlank(username) && !StringUtils.isBlank(password)) {
 			//通过用户名密码登录
-			if(!ValidateUtil.isLengthBetween(password, 6, 20)) {
-				results.reject("", "密码的长度应在6-20个字符之间");
-			}
 			if(!results.hasErrors()) {
 				try {
 					user = userService.login(username, password);
@@ -86,7 +134,7 @@ public class UserAction extends BaseAction {
 		}
 		if(user == null) {
 			//登录失败
-			return index(request, model);
+			return loginPage(request, model);
 		}
 		//将user设置到session
 		sessionProvider.setAttr(request, response, User.SESSION_KEY, user);
@@ -102,7 +150,7 @@ public class UserAction extends BaseAction {
 			}
 		}
 
-		return "redirect:/admin/admin.action";
+		return "redirect:/index.action";
 
 	}
 
@@ -147,52 +195,15 @@ public class UserAction extends BaseAction {
 		return "/user/change_password";
 	}
 
-	@RequestMapping("/user/list")
-	public String listUser(HttpServletRequest request, ModelMap model) {
-		Map<String, String[]> params = Servlets.getParametersStartingWith(request, "sParam_");
-		model.put("users", userService.findByKey(params, PageEngineFactory.getPageEngine(request)));
-		return "/user/list";
-	}
 
-	@RequestMapping("/user/add")
-	public String addUser(ModelMap model) {
-		return "/user/add";
-	}
-
-	@RequestMapping("/user/update")
-	public String updateUser(ModelMap model) {
-		return "/user/update";
-	}
-
-	@RequestMapping("/user/save")
-	public String saveUser(HttpServletRequest request, @ModelAttribute("user") @Valid User user, BindingResult results,
-			String newPassword, ModelMap model) {
-		if(!results.hasErrors()) {
-            if(userService.isUsernameExist(user.getUsername(), user.getId())) {
-                results.reject("", "登录名称已经存在");
-            }
-		}
-
-		if(results.hasErrors()) {
-			//数据验证失败
-			if(EntityUtil.isCreate(user)) {
-				return addUser(model);
-			} else {
-				return updateUser(model);
-			}
-		}
-
-//		userService.saveUser(user, newPassword);
-
-		return "redirect:/user/list.action";
-	}
-
-	@ModelAttribute("user")
-	public User getUser(Long userId, ModelMap model) {
-		if(!ValidateUtil.isNullOrZero(userId) && !model.containsKey("user")) {
+	@ModelAttribute("customer")
+	public User getCustomer(Long userId, ModelMap model) {
+		if(!ValidateUtil.isNullOrZero(userId) && !model.containsKey("customer")) {
 			return userService.get(userId);
 		} else {
-			return new User();
+            User user = new User();
+            user.setType(UserType.CUSTOMER);
+			return user;
 		}
 	}
 

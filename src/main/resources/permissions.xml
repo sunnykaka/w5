@@ -10,9 +10,9 @@
         <operation name="保存会员" url="/customer/save.action" configable="false"/>
     </resource>
 
-    <!--<role name="会员">-->
+    <role name="会员">
 
-    <!--</role>-->
+    </role>
     <role name="陪练">
         <operation ref="查询会员"/>
     </role>

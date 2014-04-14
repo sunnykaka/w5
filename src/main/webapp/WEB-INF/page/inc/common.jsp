@@ -1,41 +1,40 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 
+<!-- basic styles -->
 
-<script type="text/javascript">
-	//存放页面的分页参数与查询参数
-	var pageVariables = {searchParams:{}};
-	<%
-	Map params = request.getParameterMap();
-	for(Iterator iter = params.entrySet().iterator(); iter.hasNext();) {
-		Map.Entry entry = (Map.Entry) iter.next();
-		String name = (String) entry.getKey();
-		String[] values = (String[]) entry.getValue();
-		if(values.length==0 || values[0]==null || "".equals(values[0].trim())) continue;
-		name = name.trim();
-		if("pageIndex".equals(name)) {
-			Integer pageIndex = null;
-			try {
-				pageIndex = Integer.parseInt(values[0].trim());
-			} catch (NumberFormatException ignore) {}
-			if(pageIndex != null) {
-				out.println("pageVariables.pageIndex = '" + pageIndex + "'");
-			}
-		} else if("pageSize".equals(name)) {
-			Integer pageSize = null;
-			try {
-				pageSize = Integer.parseInt(values[0].trim());
-			} catch (NumberFormatException ignore) {}
-			if(pageSize != null) {
-				out.println("pageVariables.pageSize = '" + pageSize + "'");
-			}
-		} else if(name.startsWith("sParam_")) {
-			//String paramName = name.substring(7);
-			out.println("pageVariables.searchParams['" + name + "'] = [];");
-			for(String value : values) {
-				out.println("pageVariables.searchParams['" + name + "'].push('" + value + "');");
-			}
-		}
-	}
-	%>
-</script>
+<link href="${ctxPath}/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="${ctxPath}/assets/css/font-awesome.min.css" />
+
+<!--[if IE 7]>
+<link rel="stylesheet" href="${ctxPath}/assets/css/font-awesome-ie7.min.css" />
+<![endif]-->
+
+<!-- page specific plugin styles -->
+
+<!-- fonts -->
+
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
+<!-- ace styles -->
+
+<link rel="stylesheet" href="${ctxPath}/assets/css/ace.min.css" />
+<link rel="stylesheet" href="${ctxPath}/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="${ctxPath}/assets/css/ace-skins.min.css" />
+
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="${ctxPath}/assets/css/ace-ie.min.css" />
+<![endif]-->
+
+<!-- inline styles related to this page -->
+
+<!-- ace settings handler -->
+
+<script src="${ctxPath}/assets/js/ace-extra.min.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+<!--[if lt IE 9]>
+<script src="${ctxPath}/assets/js/html5shiv.js"></script>
+<script src="${ctxPath}/assets/js/respond.min.js"></script>
+<![endif]-->
