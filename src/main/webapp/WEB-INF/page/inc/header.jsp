@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/page/inc/taglibs.jsp" %>
+<c:set var="loginUser" value="${sessionScope['com.akkafun.w5.user.model.User'] }" />
 
 <div class="navbar navbar-default" id="navbar">
 
@@ -26,11 +27,10 @@
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                         <img class="nav-user-photo" src="${ctxPath}/assets/avatars/user.jpg" alt="Jason's Photo"/>
-								<span class="user-info">
-									<small>欢迎,</small>
-									Jason
-								</span>
-
+                            <span class="user-info">
+                                <small>欢迎,</small>
+                                <c:out value="${loginUser.username}" />
+                            </span>
                         <i class="icon-caret-down"></i>
                     </a>
 
@@ -46,7 +46,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="${ctxPath}/logout.action">
                                 <i class="icon-off"></i>
                                 退出登录
                             </a>

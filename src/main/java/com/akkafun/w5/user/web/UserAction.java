@@ -109,6 +109,51 @@ public class UserAction extends BaseAction {
         return "/customer/list";
     }
 
+    @RequestMapping(value="/coach/add")
+    public String addCoach(ModelMap model) {
+
+        return "/coach/add";
+    }
+
+    @RequestMapping("/coach/update")
+    public String updateCoach(ModelMap model) {
+
+        return "/coach/update";
+    }
+
+    @RequestMapping("/coach/save")
+    public String saveCoach(HttpServletRequest request, @ModelAttribute("coach") @Valid User coach, BindingResult results,
+                               String newPassword, ModelMap model) {
+        if(!results.hasErrors()) {
+            if(userService.isUsernameExist(coach.getUsername(), coach.getId())) {
+                results.reject("", "登录名称已经存在");
+            }
+        }
+
+        if(results.hasErrors()) {
+            //数据验证失败
+            if(EntityUtil.isCreate(coach)) {
+                return addCoach(model);
+            } else {
+                return updateCoach(model);
+            }
+        }
+
+        userService.saveUser(coach, newPassword);
+
+        return "redirect:/coach/list.action";
+    }
+
+    @RequestMapping(value="/coach/list")
+    public String listCoach(HttpServletRequest request, ModelMap model) {
+
+        Map<String, String[]> params = Servlets.getParametersStartingWith(request, "sParam_");
+        model.put("coaches", userService.findCoachByKey(params, PageEngineFactory.getPageEngine(request)));
+
+
+        return "/coach/list";
+    }
+
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String loginPage(HttpServletRequest request, ModelMap model) {
 
@@ -207,4 +252,14 @@ public class UserAction extends BaseAction {
 		}
 	}
 
+    @ModelAttribute("coach")
+    public User getCoach(Long userId, ModelMap model) {
+        if(!ValidateUtil.isNullOrZero(userId) && !model.containsKey("coach")) {
+            return userService.get(userId);
+        } else {
+            User user = new User();
+            user.setType(UserType.COACH);
+            return user;
+        }
+    }
 }

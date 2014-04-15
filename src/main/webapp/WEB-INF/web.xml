@@ -4,7 +4,7 @@
 	version="2.5">
 	<display-name>w5</display-name>
 	<welcome-file-list>
-		<welcome-file>index.action</welcome-file>
+		<welcome-file>default.action</welcome-file>
 	</welcome-file-list>
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>

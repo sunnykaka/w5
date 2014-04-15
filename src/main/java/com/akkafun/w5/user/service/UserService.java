@@ -194,6 +194,20 @@ public class UserService {
         return userDao.search(search);
     }
 
+    @Transactional(readOnly = true)
+    public List<User> findCoachByKey(Map<String, String[]> paramMap, Page page) {
+        Search search = new Search().addSortDesc("operator.addTime").setPagination(page);
+        search.addFilterEqual("type", UserType.COACH);
+
+        if (paramMap.containsKey("username") && paramMap.get("username").length > 0) {
+            String codeOrName = paramMap.get("username")[0];
+            if (!StringUtils.isBlank(codeOrName)) {
+                search.addFilter(Filter.like("username", "%" + codeOrName + "%"));
+            }
+        }
+        return userDao.search(search);
+    }
+
     /**
      * 判断用户名是否存在
      *

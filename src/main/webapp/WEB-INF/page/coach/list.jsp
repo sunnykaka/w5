@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
-    <title>查询会员</title>
+    <title>查询陪练</title>
 </head>
 
 <body>
@@ -22,8 +22,8 @@
             <i class="icon-home home-icon"></i>
             <a href="${ctxPath}/">主页</a>
         </li>
-        <li>会员管理</li>
-        <li class="active">查询会员</li>
+        <li>陪练管理</li>
+        <li class="active">查询陪练</li>
     </ul>
     <!-- .breadcrumb -->
 </div>
@@ -31,10 +31,10 @@
 <div class="page-content">
 <div class="page-header">
     <h1>
-        会员管理
+        陪练管理
         <small>
             <i class="icon-double-angle-right"></i>
-            查询会员
+            查询陪练
         </small>
     </h1>
 </div>
@@ -53,8 +53,8 @@
     <th>用户名</th>
     <th>性别</th>
     <th class="hidden-480">昵称</th>
-    <th>账户余额</th>
-    <th>享受折扣</th>
+    <th>陪练单价</th>
+    <th>提成比例</th>
     <th>QQ</th>
     <th>YY</th>
     <th>
@@ -67,20 +67,26 @@
 
 <tbody>
 
-<c:forEach items="${customers}" var="customer">
+<c:forEach items="${coaches}" var="coach">
     <tr>
-        <td><c:out value="${customer.username}"/> </td>
-        <td><c:out value="${customer.gender}"/> </td>
-        <td><c:out value="${customer.nickname}"/> </td>
-        <td><fmt:formatNumber value="${customer.balance}" type="currency" /> </td>
-        <td>${customer.discount}%</td>
-        <td><c:out value="${customer.qq}"/> </td>
-        <td><c:out value="${customer.yy}"/> </td>
-        <td><fmt:formatDate value="${customer.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
+        <td><c:out value="${coach.username}"/> </td>
+        <td><c:out value="${coach.gender}"/> </td>
+        <td><c:out value="${coach.nickname}"/> </td>
+        <td><fmt:formatNumber value="${coach.price}" type="currency" /> </td>
+        <td>${coach.proportion}%</td>
+        <td><c:out value="${coach.qq}"/> </td>
+        <td><c:out value="${coach.yy}"/> </td>
+        <td><fmt:formatDate value="${coach.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
         <td>
             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/customer/update.action?userId=${customer.id}'">
+                <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/coach/update.action?userId=${coach.id}'">
                     <i class="icon-edit bigger-120"></i>
+                </button>
+                <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/coach/salary/settle.action?userId=${coach.id}'">
+                    <i class="icon-ok bigger-120"></i>
+                </button>
+                <button class="btn btn-xs btn-warning" onclick="location.href='${ctxPath}/coach/salary/list.action?userId=${coach.id}'">
+                    <i class="icon-flag bigger-120"></i>
                 </button>
             </div>
         </td>

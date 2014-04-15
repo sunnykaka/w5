@@ -3,5 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib uri="/WEB-INF/tld/w5tag.tld" prefix="w5tag"%>
 <c:set var="ctxPath" value="${pageContext.request.contextPath}" />
 <c:if test="${ctxPath == '/' }"><c:set var="ctxPath" value="" /></c:if>
