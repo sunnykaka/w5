@@ -49,6 +49,45 @@ public class OrderBase implements java.io.Serializable,
 
     private Operator operator;
 
+    private Double balance;
+
+    private int proportion = 0;
+
+    private int discount = 100;
+
+    private Double payment;
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    public Double getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Double payment) {
+        this.payment = payment;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public int getProportion() {
+        return proportion;
+    }
+
+    public void setProportion(int proportion) {
+        this.proportion = proportion;
+    }
 
     public Long getId() {
         return id;

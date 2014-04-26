@@ -3,6 +3,7 @@ package com.akkafun.w5.user.web;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.akkafun.w5.user.model.UserType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.akkafun.w5.W5Application;
@@ -217,6 +221,32 @@ public class UserAction extends BaseAction {
 		}
 		return "redirect:/index.action";
 	}
+
+    @RequestMapping(value="/ajax/user/get_user")
+    @ResponseBody
+    public String getUserInAjax(String username, String userType) {
+        Map<String, Object> map = new HashMap<>();
+        if(!StringUtils.isBlank(username)){
+            User user = userService.getByUsername(username);
+            if(user != null && user.getType().toString().equals(userType)) {
+                map.put("username", user.getUsername());
+                map.put("id", user.getId());
+                map.put("balance", user.getBalance());
+                map.put("discount", user.getDiscount());
+                map.put("proportion", user.getProportion());
+                map.put("price", user.getPrice());
+            }
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            log.error("User对象转json的时候报错", e);
+        }
+
+        return null;
+    }
 
 	@RequestMapping(value="/np/user/change_password", method=RequestMethod.GET)
 	public String changePasswordPage(HttpServletRequest request) {

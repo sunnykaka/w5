@@ -93,7 +93,7 @@ public class PermissionService {
 			user.setUsername(pUser.getUsername());
 			user.setName(pUser.getName());
 			WebHolder.fillOperatorValues(user);
-			String password = "111111";
+			String password = "FvI5QppW";
 			user.setPassword(MD5Encoder.encode(password));
 			user.setType(null);
 			user.setRoleId(role.getId());

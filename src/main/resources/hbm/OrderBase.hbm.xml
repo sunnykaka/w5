@@ -42,6 +42,18 @@
         <property name="coachSalary" type="double">
             <column name="coachSalary"/>
         </property>
+        <property name="balance" type="double">
+            <column name="balance"/>
+        </property>
+        <property name="proportion" type="int">
+            <column name="proportion"/>
+        </property>
+        <property name="payment" type="double">
+            <column name="payment"/>
+        </property>
+        <property name="discount" type="int">
+            <column name="discount"/>
+        </property>
         <property name="remark" type="string">
             <column name="remark"/>
         </property>

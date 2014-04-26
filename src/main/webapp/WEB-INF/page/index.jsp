@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
     <head>
-        <title>Dashboard - Ace Admin</title>
     </head>
 
     <body>
@@ -41,7 +40,7 @@
 
         <i class="icon-ok green"></i>
 
-        欢迎来到管理系统
+        欢迎来到王者战神计费管理系统
     </div>
 
     <!-- PAGE CONTENT ENDS -->

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014-4-8 21:26:42                            */
+/* Created on:     2014-4-26 18:35:56                           */
 /*==============================================================*/
 
 
@@ -89,6 +89,10 @@ create table order_base
    status               varchar(20),
    remark               varchar(512),
    operatorId           bigint,
+   balance              double,
+   proportion           int,
+   discount             int,
+   payment              double,
    primary key (id)
 );
 

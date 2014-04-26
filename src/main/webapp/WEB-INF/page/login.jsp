@@ -17,10 +17,10 @@
 <div class="center">
     <h1>
         <i class="icon-leaf green"></i>
-        <span class="red">Ace</span>
-        <span class="white">Application</span>
+        <span class="red">王者战神</span>
+        <span class="white">计费管理系统</span>
     </h1>
-    <h4 class="blue">&copy; Company Name</h4>
+    <h4 class="blue">&copy; Ares</h4>
 </div>
 
 <div class="space-6"></div>
@@ -63,10 +63,6 @@
                         <div class="space"></div>
 
                         <div class="clearfix">
-                            <label class="inline">
-                                <input type="checkbox" class="ace" name="saveCookie" id="saveCookie" />
-                                <span class="lbl">两周免登录</span>
-                            </label>
 
                             <button type="button" id="submit_btn" class="width-35 pull-right btn btn-sm btn-primary">
                                 <i class="icon-key"></i>
@@ -96,6 +92,12 @@
 
 <script type="text/javascript">
     jQuery(function ($) {
+
+        $("body").bind('keyup',function(event) {
+            if(event.keyCode==13){
+                $("#form1").submit();
+            }
+        });
 
         $("#submit_btn").click(function() {
             $("#form1").submit();

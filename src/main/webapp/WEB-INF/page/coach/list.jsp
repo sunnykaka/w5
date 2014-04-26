@@ -55,6 +55,7 @@
     <th class="hidden-480">昵称</th>
     <th>陪练单价</th>
     <th>提成比例</th>
+    <th>账户余额</th>
     <th>QQ</th>
     <th>YY</th>
     <th>
@@ -74,6 +75,7 @@
         <td><c:out value="${coach.nickname}"/> </td>
         <td><fmt:formatNumber value="${coach.price}" type="currency" /> </td>
         <td>${coach.proportion}%</td>
+        <td><fmt:formatNumber value="${coach.balance}" type="currency" /> </td>
         <td><c:out value="${coach.qq}"/> </td>
         <td><c:out value="${coach.yy}"/> </td>
         <td><fmt:formatDate value="${coach.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
@@ -82,12 +84,14 @@
                 <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/coach/update.action?userId=${coach.id}'">
                     <i class="icon-edit bigger-120"></i>
                 </button>
+                <!--
                 <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/coach/salary/settle.action?userId=${coach.id}'">
                     <i class="icon-ok bigger-120"></i>
                 </button>
                 <button class="btn btn-xs btn-warning" onclick="location.href='${ctxPath}/coach/salary/list.action?userId=${coach.id}'">
                     <i class="icon-flag bigger-120"></i>
                 </button>
+                -->
             </div>
         </td>
     </tr>

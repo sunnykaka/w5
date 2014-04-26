@@ -79,9 +79,11 @@
         <td><fmt:formatDate value="${customer.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
         <td>
             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
-                <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/customer/update.action?userId=${customer.id}'">
-                    <i class="icon-edit bigger-120"></i>
-                </button>
+                <w5tag:permission url="/customer/update.action">
+                    <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/customer/update.action?userId=${customer.id}'">
+                        <i class="icon-edit bigger-120"></i>
+                    </button>
+                </w5tag:permission>
             </div>
         </td>
     </tr>

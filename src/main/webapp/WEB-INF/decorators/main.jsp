@@ -8,7 +8,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta charset="utf-8"/>
-    <title><decorator:title default="管理系统"/></title>
+    <title><decorator:title default="王者战神计费管理系统"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <%@ include file="/WEB-INF/page/inc/common.jsp" %>

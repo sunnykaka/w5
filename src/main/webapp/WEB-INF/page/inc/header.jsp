@@ -13,10 +13,10 @@
 
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="${ctxPath}/" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
-                    Ace Admin
+                    王者战神计费管理系统
                 </small>
             </a><!-- /.brand -->
         </div>
@@ -37,7 +37,7 @@
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 
                         <li>
-                            <a href="#">
+                            <a href="${ctxPath}/my/profile.action">
                                 <i class="icon-user"></i>
                                 个人信息
                             </a>

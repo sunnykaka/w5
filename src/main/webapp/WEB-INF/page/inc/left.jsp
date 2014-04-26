@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/page/inc/taglibs.jsp" %>
+<c:set var="loginUser" value="${sessionScope['com.akkafun.w5.user.model.User'] }" />
+<c:set var="loginUserType" value="${loginUser.type}" />
 
 <div class="sidebar" id="sidebar">
     <script type="text/javascript">
@@ -7,6 +9,92 @@
     </script>
 
     <ul class="nav nav-list">
+
+        <c:if test="${!loginUser.role.admin}">
+            <c:if test="${loginUserType eq 'COACH'}">
+            <li id="coachLi" data-first-level="true">
+                <a href="#" class="dropdown-toggle">
+                    <i class="icon-list"></i>
+                    <span class="menu-text">陪练</span>
+
+                    <b class="arrow icon-angle-down"></b>
+                </a>
+
+                <ul class="submenu">
+                    <w5tag:permission url="/my/order/add.action">
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/order/add.action">
+                                <i class="icon-double-angle-right"></i>
+                                新增订单
+                            </a>
+                        </li>
+                    </w5tag:permission>
+
+                    <w5tag:permission url="/my/order/list.action">
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/order/list.action">
+                                <i class="icon-double-angle-right"></i>
+                                我的订单
+                            </a>
+                        </li>
+                    </w5tag:permission>
+
+                    <w5tag:permission url="/my/payslip/list.action">
+                        <!--
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/payslip/list.action">
+                                <i class="icon-double-angle-right"></i>
+                                我的工资单
+                            </a>
+                        </li>
+                        -->
+                    </w5tag:permission>
+
+                    <w5tag:permission url="/my/profile.action">
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/profile.action">
+                                <i class="icon-double-angle-right"></i>
+                                我的信息
+                            </a>
+                        </li>
+                    </w5tag:permission>
+                </ul>
+            </li>
+            </c:if>
+
+            <c:if test="${loginUserType eq 'CUSTOMER'}">
+            <li data-first-level="true">
+                <a href="#" class="dropdown-toggle">
+                    <i class="icon-list"></i>
+                    <span class="menu-text">会员</span>
+
+                    <b class="arrow icon-angle-down"></b>
+                </a>
+
+                <ul class="submenu">
+                    <w5tag:permission url="/my/order/list.action">
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/order/list.action">
+                                <i class="icon-double-angle-right"></i>
+                                我的订单
+                            </a>
+                        </li>
+                    </w5tag:permission>
+
+                    <w5tag:permission url="/my/profile.action">
+                        <li data-second-level="true">
+                            <a href="${ctxPath}/my/profile.action">
+                                <i class="icon-double-angle-right"></i>
+                                我的信息
+                            </a>
+                        </li>
+                    </w5tag:permission>
+                </ul>
+            </li>
+            </c:if>
+
+        </c:if>
+
         <li data-first-level="true">
             <a href="#" class="dropdown-toggle">
                 <i class="icon-list"></i>
@@ -64,6 +152,36 @@
                 </w5tag:permission>
             </ul>
         </li>
+
+        <li data-first-level="true">
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text">订单管理</span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <w5tag:permission url="/order/add.action">
+                    <li data-second-level="true">
+                        <a href="${ctxPath}/order/add.action">
+                            <i class="icon-double-angle-right"></i>
+                            新增订单
+                        </a>
+                    </li>
+                </w5tag:permission>
+
+                <w5tag:permission url="/order/list.action">
+                    <li data-second-level="true">
+                        <a href="${ctxPath}/order/list.action">
+                            <i class="icon-double-angle-right"></i>
+                            查询订单
+                        </a>
+                    </li>
+                </w5tag:permission>
+            </ul>
+        </li>
+
     </ul><!-- /.nav-list -->
 
     <div class="sidebar-collapse" id="sidebar-collapse">

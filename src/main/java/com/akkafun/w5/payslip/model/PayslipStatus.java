@@ -15,5 +15,7 @@ public enum PayslipStatus {
 
     public final String value;
 
-
+    public String getValue() {
+        return value;
+    }
 }

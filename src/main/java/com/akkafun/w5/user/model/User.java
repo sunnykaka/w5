@@ -43,7 +43,7 @@ public class User implements java.io.Serializable,
 
     private Double price;
 
-    private Double balance;
+    private Double balance = 0d;
 
     private String name;
 
@@ -67,7 +67,7 @@ public class User implements java.io.Serializable,
 
     private String remark;
 
-    private int discount = 0;
+    private int discount = 100;
 
     private int proportion = 0;
 
@@ -219,7 +219,7 @@ public class User implements java.io.Serializable,
     }
 
     public int getDiscount() {
-        return discount;
+        return discount == 0 ? 100 : discount;
     }
 
     public void setDiscount(int discount) {

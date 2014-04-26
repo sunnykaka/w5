@@ -10,10 +10,45 @@
         <operation name="保存会员" url="/customer/save.action" configable="false"/>
     </resource>
 
-    <role name="会员">
+    <resource name="陪练管理" user-definedable="true" unique-key="coach">
+        <operation name="查看陪练详细" url="/coach/view.action" configable="false"/>
+        <operation name="查询陪练" url="/coach/list.action" required="查看陪练详细"/>
+        <operation name="新建陪练" url="/coach/add.action" required="保存陪练,查询陪练"/>
+        <operation name="编辑陪练" url="/coach/update.action" required="保存陪练,查询陪练"/>
+        <operation name="保存陪练" url="/coach/save.action" configable="false"/>
+    </resource>
 
+    <resource name="陪练" user-definedable="true" unique-key="coachlogin">
+        <operation name="个人资料维护" url="/my/profile.action"/>
+        <operation name="查询我的订单" url="/my/order/list.action"/>
+        <operation name="新建我的订单" url="/my/order/add.action" required="查询我的订单,保存我的订单"/>
+        <operation name="修改我的订单" url="/my/order/update.action" required="查询我的订单,保存我的订单"/>
+        <operation name="保存我的订单" url="/my/order/save.action" configable="false"/>
+        <operation name="取消我的订单" url="/my/order/cancel.action" required="查询我的订单"/>
+        <operation name="我的工资单" url="/my/payslip/list.action" required="查询我的订单"/>
+    </resource>
+
+
+    <resource name="订单管理" user-definedable="true" unique-key="order">
+        <operation name="查询订单" url="/order/list.action"/>
+        <operation name="新建订单" url="/order/add.action" required="查询订单,保存订单"/>
+        <operation name="修改订单" url="/order/update.action" required="查询订单,保存订单"/>
+        <operation name="保存订单" url="/order/save.action" configable="false"/>
+        <operation name="确认订单" url="/order/confirm.action" required="查询订单"/>
+        <operation name="作废订单" url="/order/invalid.action" required="查询订单"/>
+    </resource>
+
+
+    <role name="会员">
+        <operation ref="个人资料维护"/>
+        <operation ref="查询我的订单"/>
     </role>
     <role name="陪练">
         <operation ref="查询会员"/>
+        <operation ref="个人资料维护"/>
+        <operation ref="新建我的订单"/>
+        <operation ref="修改我的订单"/>
+        <operation ref="取消我的订单"/>
+        <operation ref="我的工资单"/>
     </role>
 </permissions>
