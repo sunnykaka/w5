@@ -41,6 +41,7 @@
                     <property name="exceptUrls">
                         <list>
                             <value>/login.*</value>
+                            <value>/register.*</value>
                             <value>/logout.*</value>
                             <value>/</value>
                             <value>/error/*</value>

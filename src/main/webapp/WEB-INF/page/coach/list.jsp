@@ -58,6 +58,7 @@
     <th>账户余额</th>
     <th>QQ</th>
     <th>YY</th>
+    <th>状态</th>
     <th>
         <i class="icon-time bigger-110 hidden-480"></i>
         更新时间
@@ -78,12 +79,21 @@
         <td><fmt:formatNumber value="${coach.balance}" type="currency" /> </td>
         <td><c:out value="${coach.qq}"/> </td>
         <td><c:out value="${coach.yy}"/> </td>
+        <td><c:out value="${coach.status.value}"/> </td>
         <td><fmt:formatDate value="${coach.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
         <td>
             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
                 <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/coach/update.action?userId=${coach.id}'">
                     <i class="icon-edit bigger-120"></i>
                 </button>
+                <c:if test="${coach.status eq 'WAIT_CONFIRM'}">
+                    <w5tag:permission url="/coach/confirm.action">
+                        <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/coach/confirm.action?userId=${coach.id}'">
+                            <i class="icon-ok bigger-120"></i>
+                        </button>
+                    </w5tag:permission>
+                </c:if>
+
                 <!--
                 <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/coach/salary/settle.action?userId=${coach.id}'">
                     <i class="icon-ok bigger-120"></i>

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2014-4-26 18:35:56                           */
+/* Created on:     2014-4-28 20:06:52                           */
 /*==============================================================*/
 
 
@@ -196,6 +196,7 @@ create table user
    proportion           int,
    roleId               bigint,
    operatorId           bigint,
+   status               varchar(20),
    primary key (id)
 );
 

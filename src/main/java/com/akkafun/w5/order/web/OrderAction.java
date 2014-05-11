@@ -106,6 +106,22 @@ public class OrderAction extends BaseAction {
         return "/my/order/list";
     }
 
+    @RequestMapping(value="/my/order/confirm")
+    public String confirmMyOrder(@ModelAttribute("order") OrderBase order, RedirectAttributes redirectAttributes) {
+
+        try {
+            if(!WebHolder.getUser().getId().equals(order.getCustomerId())) {
+                redirectAttributes.addAttribute("errorMsg", "只能确认自己的订单");
+            } else {
+                orderService.confirmOrder(order);
+            }
+        } catch (BusinessException e) {
+            redirectAttributes.addAttribute("errorMsg", e.getMessage());
+        }
+
+        return "redirect:/my/order/list.action";
+    }
+
 
     @RequestMapping(value="/order/add")
     public String addOrder(ModelMap model) {

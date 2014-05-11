@@ -65,6 +65,7 @@
 <thead>
 <tr>
     <th>会员用户名</th>
+    <th>会员昵称</th>
     <th>折扣</th>
     <th>陪练用户名</th>
     <th>陪练单价</th>
@@ -86,6 +87,7 @@
 <c:forEach items="${orders}" var="order">
     <tr>
         <td><c:out value="${order.customer.username}"/> </td>
+        <td><c:out value="${order.customer.nickname}"/> </td>
         <td><c:out value="${order.discount}"/>%</td>
         <td><c:out value="${order.coach.username}"/></td>
         <td><c:out value="${order.price}"/> </td>

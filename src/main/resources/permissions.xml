@@ -8,6 +8,7 @@
         <operation name="新建会员" url="/customer/add.action" required="保存会员,查询会员"/>
         <operation name="编辑会员" url="/customer/update.action" required="保存会员,查询会员"/>
         <operation name="保存会员" url="/customer/save.action" configable="false"/>
+        <operation name="审核会员" url="/customer/confirm.action" required="查询会员"/>
     </resource>
 
     <resource name="陪练管理" user-definedable="true" unique-key="coach">
@@ -16,6 +17,7 @@
         <operation name="新建陪练" url="/coach/add.action" required="保存陪练,查询陪练"/>
         <operation name="编辑陪练" url="/coach/update.action" required="保存陪练,查询陪练"/>
         <operation name="保存陪练" url="/coach/save.action" configable="false"/>
+        <operation name="审核陪练" url="/coach/confirm.action" required="查询陪练"/>
     </resource>
 
     <resource name="陪练" user-definedable="true" unique-key="coachlogin">
@@ -25,6 +27,7 @@
         <operation name="修改我的订单" url="/my/order/update.action" required="查询我的订单,保存我的订单"/>
         <operation name="保存我的订单" url="/my/order/save.action" configable="false"/>
         <operation name="取消我的订单" url="/my/order/cancel.action" required="查询我的订单"/>
+        <operation name="确认我的订单" url="/my/order/confirm.action" required="查询我的订单"/>
         <operation name="我的工资单" url="/my/payslip/list.action" required="查询我的订单"/>
     </resource>
 
@@ -42,6 +45,7 @@
     <role name="会员">
         <operation ref="个人资料维护"/>
         <operation ref="查询我的订单"/>
+        <operation ref="确认我的订单"/>
     </role>
     <role name="陪练">
         <operation ref="查询会员"/>

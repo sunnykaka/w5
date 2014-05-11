@@ -50,7 +50,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="username" id="username" class="col-xs-12 col-sm-6" readonly value="${loginUser.username}" />
+                <input type="text" name="username" id="username" class="col-xs-12 col-sm-6" readonly value="${user.username}" />
             </div>
         </div>
     </div>
@@ -61,11 +61,11 @@
         <div class="col-xs-12 col-sm-9">
             <div class="radio">
                 <label>
-                    <input name="gender" type="radio" class="ace" value="男" <c:if test="${loginUser.gender eq '男'}">checked</c:if>>
+                    <input name="gender" type="radio" class="ace" value="男" <c:if test="${user.gender eq '男'}">checked</c:if>>
                     <span class="lbl">男</span>
                 </label>
                 <label>
-                    <input name="gender" type="radio" class="ace" value="女" <c:if test="${loginUser.gender eq '女'}">checked</c:if>>
+                    <input name="gender" type="radio" class="ace" value="女" <c:if test="${user.gender eq '女'}">checked</c:if>>
                     <span class="lbl">女</span>
                 </label>
             </div>
@@ -73,13 +73,13 @@
     </div>
 
     <c:choose>
-        <c:when test="${loginUser.type eq 'COACH'}">
+        <c:when test="${user.type eq 'COACH'}">
             <div class="form-group">
                 <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="balance">账户金额</label>
 
                 <div class="col-xs-12 col-sm-9">
                     <div class="clearfix">
-                        <input type="text" name="balance" id="balance" class="col-xs-12 col-sm-6" readonly value="${loginUser.balance}" />
+                        <input type="text" name="balance" id="balance" class="col-xs-12 col-sm-6" readonly value="${user.balance}" />
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <div class="clearfix">
-                        <input type="text" name="price" id="price" class="col-xs-12 col-sm-6" readonly value="${loginUser.price}" />
+                        <input type="text" name="price" id="price" class="col-xs-12 col-sm-6" readonly value="${user.price}" />
                     </div>
                 </div>
             </div>
@@ -97,18 +97,18 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <div class="clearfix">
-                        <input type="text" name="proportion" id="proportion" class="col-xs-12 col-sm-6" readonly value="${loginUser.proportion == null ? 100 : loginUser.proportion}"/>%
+                        <input type="text" name="proportion" id="proportion" class="col-xs-12 col-sm-6" readonly value="${user.proportion == null ? 100 : user.proportion}"/>%
                     </div>
                 </div>
             </div>
         </c:when>
-        <c:when test="${loginUser.type eq 'CUSTOMER'}">
+        <c:when test="${user.type eq 'CUSTOMER'}">
             <div class="form-group">
                 <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="balance">账户金额</label>
 
                 <div class="col-xs-12 col-sm-9">
                     <div class="clearfix">
-                        <input type="text" name="balance" id="balance" class="col-xs-12 col-sm-6" readonly value="${loginUser.balance}" />
+                        <input type="text" name="balance" id="balance" class="col-xs-12 col-sm-6" readonly value="${user.balance}" />
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
 
                 <div class="col-xs-12 col-sm-9">
                     <div class="clearfix">
-                        <input type="text" name="discount" id="discount" class="col-xs-12 col-sm-6" readonly value="${loginUser.discount == null ? 100 : loginUser.discount}"/>%
+                        <input type="text" name="discount" id="discount" class="col-xs-12 col-sm-6" readonly value="${user.discount == null ? 100 : user.discount}"/>%
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="nickname" id="nickname" class="col-xs-12 col-sm-6" value="${loginUser.nickname}"/>
+                <input type="text" name="nickname" id="nickname" class="col-xs-12 col-sm-6" value="${user.nickname}"/>
             </div>
         </div>
     </div>
@@ -140,7 +140,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="name" id="name" class="col-xs-12 col-sm-6" value="${loginUser.name}"/>
+                <input type="text" name="name" id="name" class="col-xs-12 col-sm-6" value="${user.name}"/>
             </div>
         </div>
     </div>
@@ -150,7 +150,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="yy" id="yy" class="col-xs-12 col-sm-6" value="${loginUser.yy}"/>
+                <input type="text" name="yy" id="yy" class="col-xs-12 col-sm-6" value="${user.yy}"/>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="qq" id="qq" class="col-xs-12 col-sm-6" value="${loginUser.qq}"/>
+                <input type="text" name="qq" id="qq" class="col-xs-12 col-sm-6" value="${user.qq}"/>
             </div>
         </div>
     </div>
@@ -170,7 +170,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="mobile" id="mobile" class="col-xs-12 col-sm-6" value="${loginUser.mobile}"/>
+                <input type="text" name="mobile" id="mobile" class="col-xs-12 col-sm-6" value="${user.mobile}"/>
             </div>
         </div>
     </div>
@@ -180,7 +180,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="idcard" id="idcard" class="col-xs-12 col-sm-6" value="${loginUser.idcard}"/>
+                <input type="text" name="idcard" id="idcard" class="col-xs-12 col-sm-6" value="${user.idcard}"/>
             </div>
         </div>
     </div>
@@ -190,7 +190,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="email" id="email" class="col-xs-12 col-sm-6" value="${loginUser.email}"/>
+                <input type="text" name="email" id="email" class="col-xs-12 col-sm-6" value="${user.email}"/>
             </div>
         </div>
     </div>
@@ -200,7 +200,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <input type="text" name="alipay" id="alipay" class="col-xs-12 col-sm-6" value="${loginUser.alipay}"/>
+                <input type="text" name="alipay" id="alipay" class="col-xs-12 col-sm-6" value="${user.alipay}"/>
             </div>
         </div>
     </div>
@@ -210,7 +210,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-                <textarea class="form-control" id="remark" name="remark" placeholder="备注">${loginUser.remark}</textarea>
+                <textarea class="form-control" id="remark" name="remark" placeholder="备注">${user.remark}</textarea>
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.akkafun.w5.user.model.UserStatus;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,10 +94,11 @@ public class PermissionService {
 			user.setUsername(pUser.getUsername());
 			user.setName(pUser.getName());
 			WebHolder.fillOperatorValues(user);
-			String password = "FvI5QppW";
+			String password = "111111";
 			user.setPassword(MD5Encoder.encode(password));
 			user.setType(null);
 			user.setRoleId(role.getId());
+            user.setStatus(UserStatus.NORMAL);
 			userService.save(user);
 			
 		}

@@ -57,6 +57,7 @@
     <th>享受折扣</th>
     <th>QQ</th>
     <th>YY</th>
+    <th>状态</th>
     <th>
         <i class="icon-time bigger-110 hidden-480"></i>
         更新时间
@@ -76,6 +77,7 @@
         <td>${customer.discount}%</td>
         <td><c:out value="${customer.qq}"/> </td>
         <td><c:out value="${customer.yy}"/> </td>
+        <td><c:out value="${customer.status.value}"/> </td>
         <td><fmt:formatDate value="${customer.operator.updateTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
         <td>
             <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
@@ -84,6 +86,13 @@
                         <i class="icon-edit bigger-120"></i>
                     </button>
                 </w5tag:permission>
+                <c:if test="${customer.status eq 'WAIT_CONFIRM'}">
+                    <w5tag:permission url="/customer/confirm.action">
+                    <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/customer/confirm.action?userId=${customer.id}'">
+                        <i class="icon-ok bigger-120"></i>
+                    </button>
+                    </w5tag:permission>
+                </c:if>
             </div>
         </td>
     </tr>

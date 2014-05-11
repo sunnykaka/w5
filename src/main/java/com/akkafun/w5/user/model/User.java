@@ -75,6 +75,8 @@ public class User implements java.io.Serializable,
     private Long roleId;
     private Role role;
 
+    private UserStatus status;
+
     //用户拥有的权限缓存,key为url,value为Permission对象
     private Map<String, Permission> permissionsCache;
 
@@ -256,6 +258,14 @@ public class User implements java.io.Serializable,
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(UserStatus status) {
+        this.status = status;
     }
 
     /**

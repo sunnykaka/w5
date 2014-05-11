@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.akkafun.platform.exception.BusinessException;
 import com.akkafun.w5.user.model.UserType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -113,6 +114,15 @@ public class UserAction extends BaseAction {
         return "/customer/list";
     }
 
+
+    @RequestMapping(value="/customer/confirm")
+    public String confirmCustomer(@ModelAttribute("customer") User customer) {
+
+        userService.confirmUser(customer);
+
+        return "redirect:/customer/list.action";
+    }
+
     @RequestMapping(value="/coach/add")
     public String addCoach(ModelMap model) {
 
@@ -156,6 +166,14 @@ public class UserAction extends BaseAction {
 
 
         return "/coach/list";
+    }
+
+    @RequestMapping(value="/coach/confirm")
+    public String confirmCoach(@ModelAttribute("coach") User coach) {
+
+        userService.confirmUser(coach);
+
+        return "redirect:/coach/list.action";
     }
 
     @RequestMapping(value="/login", method = RequestMethod.GET)
@@ -247,28 +265,6 @@ public class UserAction extends BaseAction {
 
         return null;
     }
-
-	@RequestMapping(value="/np/user/change_password", method=RequestMethod.GET)
-	public String changePasswordPage(HttpServletRequest request) {
-		return "/user/change_password";
-	}
-
-	@RequestMapping(value="/np/user/change_password", method=RequestMethod.POST)
-	public String changePassword(HttpServletRequest request, String oldPassword, String newPassword, ModelMap model) {
-		boolean success = false;
-		if(!ValidateUtil.isLengthBetween(newPassword, 6, 20)) {
-			//新密码格式不符合规范
-			addErrorMsg(model, "密码需要在6~20位之间");
-		} else {
-			User user = (User)sessionProvider.getAttr(request, User.SESSION_KEY);
-			success = userService.changePassword(user, oldPassword, newPassword);
-			if(!success) {
-				addErrorMsg(model, "密码输入错误");
-			}
-		}
-		model.addAttribute("success", success);
-		return "/user/change_password";
-	}
 
 
 	@ModelAttribute("customer")

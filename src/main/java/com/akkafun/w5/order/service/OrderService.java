@@ -59,6 +59,14 @@ public class OrderService {
                 search.addFilterEqual("coachId", Long.parseLong(coachId));
             }
         }
+
+        if (paramMap.containsKey("customerId") && paramMap.get("customerId").length > 0) {
+            String customerId = paramMap.get("customerId")[0];
+            if (!StringUtils.isBlank(customerId)) {
+                search.addFilterEqual("customerId", Long.parseLong(customerId));
+            }
+        }
+
         return orderDao.search(search);
     }
 

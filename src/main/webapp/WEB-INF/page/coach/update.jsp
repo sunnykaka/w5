@@ -106,6 +106,16 @@
     </div>
 
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="balance">账户金额</label>
+
+        <div class="col-xs-12 col-sm-9">
+            <div class="clearfix">
+                <input type="text" name="balance" id="balance" class="col-xs-12 col-sm-6" value="${coach.balance == null ? 0 : coach.balance}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="nickname">昵称</label>
 
         <div class="col-xs-12 col-sm-9">

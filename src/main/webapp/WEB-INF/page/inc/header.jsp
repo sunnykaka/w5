@@ -46,6 +46,15 @@
                         <li class="divider"></li>
 
                         <li>
+                            <a href="${ctxPath}/np/my/change_password.action">
+                                <i class="icon-film"></i>
+                                修改密码
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
                             <a href="${ctxPath}/logout.action">
                                 <i class="icon-off"></i>
                                 退出登录

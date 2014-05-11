@@ -9,10 +9,12 @@ import java.util.Set;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import com.akkafun.platform.exception.BusinessException;
 import com.akkafun.platform.util.EntityUtil;
 import com.akkafun.w5.common.Constants;
 import com.akkafun.w5.common.util.SessionUtil;
 import com.akkafun.w5.common.web.WebHolder;
+import com.akkafun.w5.user.model.UserStatus;
 import com.akkafun.w5.user.model.UserType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -164,6 +166,12 @@ public class UserService {
         if (user == null) {
             throw new AppException("该帐号不存在");
         }
+        if(UserStatus.WAIT_CONFIRM.equals(user.getStatus())) {
+            throw new AppException("请等待管理员审核您的帐号");
+        }
+        if(!UserStatus.NORMAL.equals(user.getStatus())) {
+            throw new AppException("您的账号已被禁止登录");
+        }
         if (!user.getPassword().equals(MD5Encoder.encode(password))) {
             throw new AppException("密码错误,请重新输入");
         }
@@ -231,6 +239,7 @@ public class UserService {
         WebHolder.fillOperatorValues(user);
 
         if(EntityUtil.isCreate(user) && !SessionUtil.isAdmin(user)) {
+            user.setStatus(UserStatus.NORMAL);
             switch (user.getType()) {
                 case CUSTOMER: {
                     user.setRoleId(roleService.getCustomerRole().getId());
@@ -245,4 +254,30 @@ public class UserService {
         userDao.save(user);
     }
 
+    @Transactional
+    public void register(User user) {
+
+        user.setPassword(MD5Encoder.encode(user.getPassword()));
+
+        WebHolder.fillOperatorValues(user);
+
+        switch (user.getType()) {
+            case CUSTOMER: {
+                user.setRoleId(roleService.getCustomerRole().getId());
+                break;
+            } case COACH: {
+                user.setRoleId(roleService.getCoachRole().getId());
+                break;
+            }
+        }
+        user.setStatus(UserStatus.WAIT_CONFIRM);
+
+        userDao.save(user);
+    }
+
+    @Transactional
+    public void confirmUser(User user) {
+        user.setStatus(UserStatus.NORMAL);
+        userDao.save(user);
+    }
 }

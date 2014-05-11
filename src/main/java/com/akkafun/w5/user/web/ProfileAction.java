@@ -46,9 +46,15 @@ public class ProfileAction extends BaseAction {
 	@Autowired
 	private UserService userService;
 
+    @Autowired
+    protected SessionProvider sessionProvider;
+
+
 
     @RequestMapping(value="/my/profile", method = RequestMethod.GET)
     public String profilePage(ModelMap model) {
+
+        model.addAttribute("user", userService.get(WebHolder.getUser().getId()));
 
         return "/my/profile";
     }
@@ -74,6 +80,22 @@ public class ProfileAction extends BaseAction {
         loginUser.setRemark(user.getRemark());
 
         return "redirect:/my/profile.action";
+    }
+
+    @RequestMapping(value="/np/my/change_password", method=RequestMethod.GET)
+    public String changePasswordPage(HttpServletRequest request) {
+        return "/my/change_password";
+    }
+
+    @RequestMapping(value="/np/my/change_password", method=RequestMethod.POST)
+    public String changePassword(HttpServletRequest request, String oldPassword, String newPassword, ModelMap model) {
+        boolean success = false;
+        User user = (User)sessionProvider.getAttr(request, User.SESSION_KEY);
+        success = userService.changePassword(user, oldPassword, newPassword);
+        if(!success) {
+            addErrorMsg(model, "密码输入错误");
+        }
+        return "/my/change_password";
     }
 
 

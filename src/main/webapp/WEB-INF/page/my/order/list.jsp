@@ -47,14 +47,30 @@
 <div class="col-xs-12">
 <!-- PAGE CONTENT BEGINS -->
 
-<div class="row">
+    <c:if test="${not empty param.errorMsg}">
+        <div class="alert alert-block alert-danger">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="icon-remove"></i>
+            </button>
+
+            <i class="icon-error red"></i>
+
+            <c:out value="${param.errorMsg}" /><br/>
+        </div>
+
+    </c:if>
+
+
+    <div class="row">
 <div class="col-xs-12">
 <div class="table-responsive">
 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
 <thead>
 <tr>
     <th>会员用户名</th>
+    <th>会员昵称</th>
     <th>陪练用户名</th>
+    <th>陪练昵称</th>
     <th>陪练单价</th>
     <th><i class="icon-time bigger-110 hidden-480"></i>开始时间</th>
     <th><i class="icon-time bigger-110 hidden-480"></i>结束时间</th>
@@ -76,7 +92,9 @@
 <c:forEach items="${orders}" var="order">
     <tr>
         <td><c:out value="${order.customer.username}"/> </td>
+        <td><c:out value="${order.customer.nickname}"/> </td>
         <td><c:out value="${order.coach.username}"/> </td>
+        <td><c:out value="${order.coach.nickname}"/> </td>
         <td><c:out value="${order.price}"/> </td>
         <td><fmt:formatDate value="${order.startTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
         <td><fmt:formatDate value="${order.endTime}" pattern="yyyy-MM-dd HH:mm"/> </td>
@@ -95,6 +113,14 @@
                 <c:if test="${order.status eq 'WAIT_CONFIRM'}">
                     <button class="btn btn-xs btn-info" onclick="location.href='${ctxPath}/my/order/update.action?orderId=${order.id}'">
                         <i class="icon-edit bigger-120"></i>
+                    </button>
+                </c:if>
+                </w5tag:permission>
+
+                <w5tag:permission url="/my/order/confirm.action">
+                <c:if test="${order.status eq 'WAIT_CONFIRM'}">
+                    <button class="btn btn-xs btn-success" onclick="location.href='${ctxPath}/my/order/confirm.action?orderId=${order.id}'">
+                        <i class="icon-ok bigger-120"></i>
                     </button>
                 </c:if>
                 </w5tag:permission>

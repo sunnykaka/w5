@@ -74,5 +74,12 @@
         <many-to-one name="operator" cascade="all">
         	<column name="operatorId"/>
         </many-to-one>
+        <property name="status" column="status">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.akkafun.w5.user.model.UserStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
     </class>
 </hibernate-mapping>
